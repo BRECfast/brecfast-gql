@@ -1,0 +1,78 @@
+enum ParkClassification {
+  NEIGHBORHOOD
+  GOLF_COURSE
+  CONSERVATION
+  SPECIAL_FACILITY
+  COMMUNITY
+}
+
+enum EventStatus {
+  PENDING
+  UNFILLED
+  CANCELED
+  CONFIRMED
+}
+
+enum ParticipationRole {
+  MEMBER
+  OWNER
+}
+
+type User @model {
+  id: ID! @isUnique
+  name: String!
+  participations: [Participation!]! @relation(name: "UserParticipation")
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Participation @model {
+  id: ID! @isUnique
+  user: User! @relation(name: "UserParticipation")
+  event: Event! @relation(name: "EventParticipation")
+  role: ParticipationRole!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Activity @model {
+  id: ID! @isUnique
+  # This is used for syncing the open data
+  externalId: String! @isUnique
+  name: String
+  parks: [Park!]! @relation(name: "ParkActivities")
+  events: [Event!]! @relation(name: "EventActivities")
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Park @model {
+  id: ID! @isUnique
+  # This is used for syncing the open data
+  externalId: String! @isUnique
+  name: String!
+  classification: ParkClassification!
+  address: String!
+  city: String!
+  zipcode: String!
+  latitude: Float!
+  longitude: Float!
+  activities: [Activity!]! @relation(name: "ParkActivities")
+  events: [Event!]! @relation(name: "ParkEvents")
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Event @model {
+  id: ID! @isUnique
+  name: String
+  time: DateTime!
+  status: EventStatus! @defaultValue(value: "PENDING")
+  park: Park! @relation(name: "ParkEvents")
+  activities: [Activity!]! @relation(name: "EventActivities")
+  participations: [Participation!]! @relation(name: "EventParticipation")
+  minParticipants: Int!
+  maxParticipants: Int
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
