@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "My Graphcool Service",
   "dependencies": {
-    "graphcool": "^0.11.5"
+    "algoliasearch": "^3.24.11"
+  },
+  "devDependencies": {
+    "graphcool": "^0.11.5",
+    "prettier": "^1.10.2"
   }
 }

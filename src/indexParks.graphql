@@ -1,0 +1,22 @@
+subscription {
+  Park(filter: { mutation_in: [CREATED, UPDATED, DELETED] }) {
+    mutation
+    previousValues {
+      id
+    }
+    node {
+      id
+      name
+      classification
+      address
+      city
+      zipcode
+      latitude
+      longitude
+      activities {
+        id
+        name
+      }
+    }
+  }
+}

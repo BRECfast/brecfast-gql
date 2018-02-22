@@ -1,0 +1,34 @@
+subscription {
+  Event(filter: { mutation_in: [CREATED, UPDATED, DELETED] }) {
+    mutation
+    previousValues {
+      id
+    }
+    node {
+      id
+      name
+      activities {
+        id
+        name
+      }
+      participations {
+        id
+        user {
+          id
+          name
+        }
+      }
+      minParticipants
+      maxParticipants
+      _participationsMeta {
+        count
+      }
+      park {
+        id
+        name
+        latitude
+        longitude
+      }
+    }
+  }
+}

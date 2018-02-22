@@ -13,10 +13,29 @@
 #
 # Happy Coding!
 
-
-# In the types.graphql you define your data schema
 types: ./types.graphql
 
+functions:
+  indexEvents:
+    handler:
+      code:
+        src: ./src/indexEvents.js
+        environment:
+          ALGOLIA_APP_ID: ${env:ALGOLIA_APP_ID}
+          ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY}
+          ALGOLIA_INDEX_NAME: events-${opt:target}
+    type: subscription
+    query: ./src/indexEvents.graphql
+  indexParks:
+    handler:
+      code:
+        src: ./src/indexParks.js
+        environment:
+          ALGOLIA_APP_ID: ${env:ALGOLIA_APP_ID}
+          ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY}
+          ALGOLIA_INDEX_NAME: parks-${opt:target}
+    type: subscription
+    query: ./src/indexParks.graphql
 
 # functions:
 #   hello:
