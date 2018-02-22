@@ -37,9 +37,7 @@ type Participation @model {
 
 type Activity @model {
   id: ID! @isUnique
-  # This is used for syncing the open data
-  externalId: String! @isUnique
-  name: String
+  name: String!
   parks: [Park!]! @relation(name: "ParkActivities")
   events: [Event!]! @relation(name: "EventActivities")
   createdAt: DateTime!
@@ -48,8 +46,6 @@ type Activity @model {
 
 type Park @model {
   id: ID! @isUnique
-  # This is used for syncing the open data
-  externalId: String! @isUnique
   name: String!
   classification: ParkClassification!
   address: String!

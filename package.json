@@ -6,6 +6,7 @@
     "algoliasearch": "^3.24.11"
   },
   "devDependencies": {
+    "axios": "^0.18.0",
     "graphcool": "^0.11.5",
     "prettier": "^1.10.2"
   }

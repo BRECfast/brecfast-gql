@@ -1,0 +1,24 @@
+{
+  "data": [
+    { "id": "baseball", "name": "Baseball" },
+    { "id": "basketball", "name": "Basketball" },
+    { "id": "bmx", "name": "BMX" },
+    { "id": "bocce", "name": "Bocce" },
+    { "id": "croquet", "name": "Croquet" },
+    { "id": "cycling", "name": "Cycling" },
+    { "id": "disc_golf", "name": "Disc Golf" },
+    { "id": "equestrian", "name": "Equestrian" },
+    { "id": "fishing", "name": "Fishing" },
+    { "id": "fitness", "name": "Fitness" },
+    { "id": "football", "name": "Football" },
+    { "id": "golf", "name": "Golf" },
+    { "id": "mountain_biking", "name": "Moutain Biking" },
+    { "id": "rugby", "name": "Rugby" },
+    { "id": "running", "name": "Running" },
+    { "id": "skating", "name": "Skating" },
+    { "id": "soccer", "name": "Soccer" },
+    { "id": "swimming", "name": "Swimming" },
+    { "id": "tennis", "name": "Tennis" },
+    { "id": "walking", "name": "Walking" }
+  ]
+}
