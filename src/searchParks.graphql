@@ -1,0 +1,25 @@
+# You cannot use types defined in the main Schema file,
+# so this is essentially a copy of the Park object with
+# _geoDistance added.
+#
+# See: https://github.com/graphcool/graphcool-framework/issues/255
+type ParkResult {
+  id: ID!
+  name: String!
+  address: String!
+  city: String!
+  zipcode: String!
+  latitude: Float!
+  longitude: Float!
+  _geoDistance: Float
+}
+
+extend type Query {
+  searchParks(
+    query: String
+    latitude: Float
+    longitude: Float
+    someActivitiesIds: [String!]
+    allActivitiesIds: [String!]
+  ): [ParkResult!]!
+}
