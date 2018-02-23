@@ -3,10 +3,20 @@
 # _geoDistance added.
 #
 # See: https://github.com/graphcool/graphcool-framework/issues/255
-type ParkResult {
+type EventResult {
   id: ID!
-  name: String!
-  classification: String!
+  status: String!
+  time: DateTime!
+  activityId: ID!
+  activityName: String!
+  parkId: ID!
+  parkName: String!
+  ownerId: ID
+  ownerEmail: String
+  ownerName: String
+  minParticipants: Int!
+  maxParticipants: Int
+  participantsCount: Int!
   address: String!
   city: String!
   zipcode: String!
@@ -18,11 +28,13 @@ type ParkResult {
 }
 
 extend type Query {
-  searchParks(
+  searchEvents(
     query: String
     latitude: Float
     longitude: Float
-    activitiesIds_contain_some: [String!]
-    activitiesIds_contain_all: [String!]
-  ): [ParkResult!]!
+    time_gte: DateTime
+    time_lte: DateTime
+    activityId_in: [String!]
+    status_in: [String!]
+  ): [EventResult!]!
 }

@@ -8,14 +8,22 @@ function getIndex() {
 }
 
 function transformNode(node) {
-  return {
+  const toIndex = {
     ...node,
     objectID: node.id,
+    time: Date.parse(node.time),
+    createdAt: Date.parse(node.createdAt),
+    updatedAt: Date.parse(node.updatedAt),
     _geoloc: {
       lat: node.park.latitude,
       lng: node.park.longitude,
     },
   };
+  const owner = node.participations.find(p => p.role === 'OWNER');
+  if (owner) {
+    toIndex.owner = owner.user;
+  }
+  return toIndex;
 }
 
 function syncSavedNode(node) {

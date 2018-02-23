@@ -6,14 +6,30 @@ function getIndex() {
 }
 
 function transformHit(geoSearch, hit) {
-  const { _geoloc, _highlightResult, _rankingInfo, ...parkResult } = hit;
+  const {
+    objectID,
+    _geoloc,
+    _highlightResult,
+    _rankingInfo,
+    createdAt,
+    updatedAt,
+    ...parkResult
+  } = hit;
+  parkResult.createdAt = new Date(createdAt).toISOString();
+  parkResult.updatedAt = new Date(createdAt).toISOString();
   if (geoSearch) {
     parkResult._geoDistance = hit._rankingInfo.geoDistance;
   }
   return parkResult;
 }
 
-function buildQueryParams({ query, latitude, longitude, allActivitiesIds, someActivitiesIds }) {
+function buildQueryParams({
+  query,
+  latitude,
+  longitude,
+  activitiesIds_contain_all,
+  activitiesIds_contain_some,
+}) {
   const params = {
     getRankingInfo: true,
   };
@@ -23,11 +39,11 @@ function buildQueryParams({ query, latitude, longitude, allActivitiesIds, someAc
   if (latitude && longitude) {
     params.aroundLatLng = `${latitude},${longitude}`;
   }
-  if (allActivitiesIds) {
-    params.facetFilters = allActivitiesIds.map(id => `activities.id:${id}`);
-  }
-  if (someActivitiesIds) {
-    params.facetFilters = [someActivitiesIds.map(id => `activities.id:${id}`)];
+
+  if (activitiesIds_contain_all) {
+    params.facetFilters = activitiesIds_contain_all.map(id => `activities.id:${id}`);
+  } else if (activitiesIds_contain_some) {
+    params.facetFilters = [activitiesIds_contain_some.map(id => `activities.id:${id}`)];
   }
   return params;
 }
@@ -37,12 +53,12 @@ module.exports = async event => {
     const params = buildQueryParams(event.data || {});
     const response = await getIndex().search(params);
     return {
-      data: response.hits.map(h => transformHit(params.aroundLatLng != null, h)),
+      data: response.hits.map(hit => transformHit(params.aroundLatLng != null, hit)),
     };
   } catch (error) {
     console.log(error);
     return {
-      error: 'Uhoh',
+      error: 'Could not search because of an error.',
     };
   }
 };

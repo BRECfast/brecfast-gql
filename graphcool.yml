@@ -22,16 +22,6 @@ functions:
     schema: src/authenticateByDeviceId.graphql
     handler:
       code: src/authenticateByDeviceId.js
-  searchParks:
-    type: resolver
-    schema: src/searchParks.graphql
-    handler:
-      code:
-        src: src/searchParks.js
-        environment:
-          ALGOLIA_APP_ID: ${env:ALGOLIA_APP_ID}
-          ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY}
-          ALGOLIA_INDEX_NAME: parks-${opt:target}
   indexEvents:
     handler:
       code:
@@ -42,6 +32,16 @@ functions:
           ALGOLIA_INDEX_NAME: events-${opt:target}
     type: subscription
     query: ./src/indexEvents.graphql
+  searchEvents:
+    type: resolver
+    schema: src/searchEvents.graphql
+    handler:
+      code:
+        src: src/searchEvents.js
+        environment:
+          ALGOLIA_APP_ID: ${env:ALGOLIA_APP_ID}
+          ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY}
+          ALGOLIA_INDEX_NAME: events-${opt:target}
   indexParks:
     handler:
       code:
@@ -52,6 +52,16 @@ functions:
           ALGOLIA_INDEX_NAME: parks-${opt:target}
     type: subscription
     query: ./src/indexParks.graphql
+  searchParks:
+    type: resolver
+    schema: src/searchParks.graphql
+    handler:
+      code:
+        src: src/searchParks.js
+        environment:
+          ALGOLIA_APP_ID: ${env:ALGOLIA_APP_ID}
+          ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY}
+          ALGOLIA_INDEX_NAME: parks-${opt:target}
 
 
 # Model/Relation permissions are used to limit the API access

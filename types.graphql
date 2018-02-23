@@ -7,7 +7,6 @@ enum ParkClassification {
 }
 
 enum EventStatus {
-  PENDING
   UNFILLED
   CANCELED
   CONFIRMED
@@ -42,7 +41,7 @@ type Activity @model {
   id: ID! @isUnique
   name: String!
   parks: [Park!]! @relation(name: "ParkActivities")
-  events: [Event!]! @relation(name: "EventActivities")
+  events: [Event!]! @relation(name: "EventActivity")
   interestedUsers: [User!]! @relation(name: "UserInterests")
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -65,11 +64,10 @@ type Park @model {
 
 type Event @model {
   id: ID! @isUnique
-  name: String
   time: DateTime!
-  status: EventStatus! @defaultValue(value: "PENDING")
+  activity: Activity! @relation(name: "EventActivity")
+  status: EventStatus! @defaultValue(value: "UNFILLED")
   park: Park! @relation(name: "ParkEvents")
-  activities: [Activity!]! @relation(name: "EventActivities")
   participations: [Participation!]! @relation(name: "EventParticipation")
   minParticipants: Int!
   maxParticipants: Int

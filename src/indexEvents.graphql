@@ -6,13 +6,21 @@ subscription {
     }
     node {
       id
-      name
-      activities {
+      status
+      time
+      activity {
         id
         name
       }
+      park {
+        id
+        name
+        latitude
+        longitude
+      }
       participations {
         id
+        role
         user {
           id
           name
@@ -23,12 +31,8 @@ subscription {
       _participationsMeta {
         count
       }
-      park {
-        id
-        name
-        latitude
-        longitude
-      }
+      createdAt
+      updatedAt
     }
   }
 }

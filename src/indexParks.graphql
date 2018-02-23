@@ -17,6 +17,8 @@ subscription {
         id
         name
       }
+      createdAt
+      updatedAt
     }
   }
 }

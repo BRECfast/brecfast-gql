@@ -11,6 +11,8 @@ function transformNode(node) {
   return {
     ...node,
     objectID: node.id,
+    createdAt: Date.parse(node.createdAt),
+    updatedAt: Date.parse(node.updatedAt),
     _geoloc: {
       lat: node.latitude,
       lng: node.longitude,
