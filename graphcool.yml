@@ -16,6 +16,11 @@
 types: ./types.graphql
 
 functions:
+  authenticateByDeviceId:
+    type: resolver
+    schema: src/authenticateByDeviceId.graphql
+    handler:
+      code: src/authenticateByDeviceId.js
   indexEvents:
     handler:
       code:

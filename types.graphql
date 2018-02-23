@@ -21,7 +21,10 @@ enum ParticipationRole {
 type User @model {
   id: ID! @isUnique
   name: String!
+  email: String! @isUnique
+  deviceId: String! @isUnique
   participations: [Participation!]! @relation(name: "UserParticipation")
+  interests: [Activity!]! @relation(name: "UserInterests")
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -40,6 +43,7 @@ type Activity @model {
   name: String!
   parks: [Park!]! @relation(name: "ParkActivities")
   events: [Event!]! @relation(name: "EventActivities")
+  interestedUsers: [User!]! @relation(name: "UserInterests")
   createdAt: DateTime!
   updatedAt: DateTime!
 }

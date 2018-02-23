@@ -1,0 +1,8 @@
+type AuthenticateByDeviceIdPayload {
+  id: ID!
+  token: String!
+}
+
+extend type Mutation {
+  authenticateByDeviceId(deviceId: String!): AuthenticateByDeviceIdPayload
+}

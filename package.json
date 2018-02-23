@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "My Graphcool Service",
   "dependencies": {
-    "algoliasearch": "^3.24.11"
+    "algoliasearch": "^3.24.11",
+    "graphcool-lib": "^0.1.4"
   },
   "devDependencies": {
     "axios": "^0.18.0",
