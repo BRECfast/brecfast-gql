@@ -39,7 +39,7 @@ const ACTIVITIES_BY_FEATURE_NAME = {
 };
 
 function getParkData() {
-  return axios.get('https://data.brla.gov/api/views/phg8-g77c/rows.json');
+  return axios.get('https://data.brla.gov/api/views/phg8-g77c/rows.json').then(r => r.data);
 }
 
 function getField(meta, park, fieldName) {
